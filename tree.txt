@@ -1,0 +1,27 @@
+Folder PATH listing for volume MSEN
+Volume serial number is AED0-501D
+E:.
+|   README.md
+|   install_dependencies.py
+|   tree.txt
+|   
++---src
+|       preprocessing.py
+|       feat_engineering.py
+|       utils.py
+|       
++---visuals
++---notebooks
+|       EDA.ipynb
+|       EDA (Model Answer).ipynb
+|       feature_engineering.ipynb
+|       
+\---data
+    |   clean_data_after_eda.csv
+    |   final_merged_features.csv
+    |   
+    \---raw
+            client_data.csv
+            Data Description.pdf
+            price_data.csv
+            

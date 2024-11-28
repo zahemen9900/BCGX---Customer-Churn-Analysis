@@ -1,7 +1,9 @@
+import numpy as np
 import pandas as pd
+from datetime import datetime
 from typing import Union, Optional
 
-def preprocess_data(data: Union[pd.DataFrame, str], dropna: bool = True, fillna_value: Optional[Union[int, float, str]] = None) -> pd.DataFrame:
+def clean_data(data: Union[pd.DataFrame, str], dropna: bool = True, fillna_value: Optional[Union[int, float, str]] = None) -> pd.DataFrame:
     """
     Preprocesses the given data by converting date columns to datetime and ensuring object columns are converted to strings.
     Optionally drops or fills NaN values.

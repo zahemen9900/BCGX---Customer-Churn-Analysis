@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
 class FeatureEngineering:
     def __init__(self, price_df):
@@ -136,9 +137,65 @@ class FeatureEngineering:
         self.calculate_rolling_averages()
         self.calculate_price_variability()
         # Merge final features back with the original price DataFrame
-        self.price_df = self.price_df.join(self.features, on='id', how='left')
+        self.price_df = self.price_df.drop('price_date', axis = 1).join(self.features, on='id', how='left')
         return self.price_df
     
+
+    def wrangle_final(self, client_df: pd.DataFrame, price_df: pd.DataFrame)-> pd.DataFrame:
+        client_df['tenure'] = ((client_df['date_end'] - client_df['date_activ']).dt.days / 365.25).astype(int)
+
+        def convert_months(reference_date, client_df, column):
+            """
+            Input a column with timedeltas and return months.
+            """
+            # Calculate the time delta in days
+            time_delta = (reference_date - client_df[column]).dt.days
+
+            # Convert days to months (average month length is approximately 30.44 days)
+            months = (time_delta / 30.44).astype(int)
+            return months
+        
+        reference_date = datetime(2016, 1, 1)
+
+        # Create columns
+        client_df['months_activ'] = convert_months(reference_date, client_df, 'date_activ')
+        client_df['months_to_end'] = -convert_months(reference_date, client_df, 'date_end')
+        client_df['months_modif_prod'] = convert_months(reference_date, client_df, 'date_modif_prod')
+        client_df['months_renewal'] = convert_months(reference_date, client_df, 'date_renewal')
+
+        cols_to_remove = ['date_activ','date_end','date_modif_prod','date_renewal']
+        client_df = client_df.drop(columns=cols_to_remove)
+
+        client_df['has_gas'] = client_df['has_gas'].map({'t': 1, 'f': 0})
+
+        client_df['channel_sales'] = client_df['channel_sales'].astype('category')
+        client_df = pd.get_dummies(client_df, columns=['channel_sales'], prefix='channel')
+        client_df = client_df.drop(['channel_sddiedcslfslkckwlfkdpoeeailfpeds', 'channel_epumfxlbckeskwekxbiuasklxalciiuu', 'channel_fixdbufsefwooaasfcxdxadsiekoceaa'], axis = 1)
+
+        client_df['origin_up'] = client_df['origin_up'].astype('category')
+        client_df = pd.get_dummies(client_df, columns = ['origin_up'], prefix = 'origin_up')
+        client_df = client_df.drop(columns=['origin_up_MISSING', 'origin_up_usapbepcfoloekilkwsdiboslwaxobdp', 'origin_up_ewxeelcelemmiwuafmddpobolfuxioce'])
+
+
+        # Apply log10 transformation
+        client_df["cons_12m"] = np.log10(client_df["cons_12m"] + 1)
+        client_df["cons_gas_12m"] = np.log10(client_df["cons_gas_12m"] + 1)
+        client_df["cons_last_month"] = np.log10(client_df["cons_last_month"] + 1)
+        client_df["forecast_cons_12m"] = np.log10(client_df["forecast_cons_12m"] + 1)
+        client_df["forecast_cons_year"] = np.log10(client_df["forecast_cons_year"] + 1)
+        client_df["forecast_meter_rent_12m"] = np.log10(client_df["forecast_meter_rent_12m"] + 1)
+        client_df["imp_cons"] = np.log10(client_df["imp_cons"] + 1)
+
+        #drop features in client_client_df with high correlation
+        client_df = client_df.drop(['num_years_antig', 'forecast_cons_year', 'months_activ','has_gas'], axis = 1)
+
+        price_df = price_df.drop(
+        ['rolling_3m_avg_price_off_peak_var', 'price_off_peak_var_rolling', 'avg_price_off_peak_var', 'min_price_off_peak_var', 'max_price_off_peak_var', \
+        'price_off_peak_fix', 'price_off_peak_fix_rolling', 'avg_price_off_peak_fix', 'rolling_3m_avg_price_off_peak_fix', 'price_off_peak_var_rolling']
+        , axis = 1)
+
+        return client_df, price_df
+        
 # Usage example:
 # price_df = pd.read_csv('path/to/price_data.csv')  # Ensure price_df is already loaded
 # pipeline = FeatureEngineeringPipeline(price_df)

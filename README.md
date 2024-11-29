@@ -1,75 +1,108 @@
-# Predicting Customer Churn - BCG-_**X**_
+# Predicting Customer Churn - BCG _**X**_
 
-This project is part of my virtual internship at **BCG-X** as a Data Science Intern, where I developed a data-driven solution to predict customer churn. The project focuses on analyzing customer data, engineering meaningful features, and training a machine learning model to identify customers at risk of churn.
+This repository showcases the work I completed during my virtual internship at **BCG X** _(British Consulting Group)_ as a Data Science Intern. The goal of this project was to design a data-driven solution to predict customer churn, empowering businesses to proactively address customer retention challenges.
 
-## Project Overview
+---
 
-Churn prediction is a critical task in many industries, particularly for utility companies looking to retain customers. By identifying customers likely to churn, proactive strategies can be implemented to improve retention rates.
+## 🚀 Project Overview
 
-### Key Components
+**Customer churn** prediction is a critical component for industries, especially utilities, seeking to retain customers in competitive markets. By identifying customers likely to churn, organizations can implement targeted strategies to boost retention and reduce operational costs.
 
-1. **Data Analysis**
-   - Performed exploratory data analysis (EDA) to uncover trends and patterns.
-   - Used visualizations to highlight customer behaviors and features impacting churn.
+---
 
-2. **Feature Engineering**
-   - Created new features based on domain insights, such as pricing trends and seasonality effects.
-   - Engineered innovative features like off-peak energy differences between December and January, rolling averages, and variability measures.
+### 🔑 Key Features
 
-3. **Model Training**
-   - Trained a **Random Forest Classifier** for churn prediction.
-   - Used **Optuna** for hyperparameter tuning to optimize model performance.
+#### 1. **Data Analysis**
+- Conducted extensive **exploratory data analysis (EDA)** to uncover trends and patterns.
+- Leveraged visualizations to highlight customer behaviors and pinpoint features influencing churn.
 
-4. **Evaluation**
-   - Evaluated the model using **precision**, **recall**,**F1-score**, and **ROC-AUC** metrics.
-   - Conducted feature importance analysis to interpret the model.
+#### 2. **Feature Engineering**
+- Created innovative features based on domain insights, including:
+  - **Pricing trends** (e.g., off-peak energy differences).
+  - **Rolling averages** for capturing seasonality effects.
+  - Variability measures for detecting consumption shifts.
+- Engineered predictive features such as **tenure calculations** and **contract proximity buckets**.
 
-## Project Structure
+#### 3. **Model Development**
+- Implemented a **Random Forest Classifier** to predict churn with high accuracy.
+- Optimized model performance using **Optuna** for hyperparameter tuning.
+- Assessed model reliability through **precision**, **recall**, **F1-score**, and **ROC-AUC** metrics.
 
-```text
+#### 4. **Model Interpretation**
+- Analyzed feature importance to identify the most influential predictors.
+- Planned for enhanced interpretability with **SHAP** values (next steps).
+
+---
+
+## 🗂 Project Structure
+
+```plaintext
 ├── data/                       # Raw and processed datasets
+│   ├── raw/                    # Original data files
+│   └── processed/              # Cleaned and feature-enriched datasets
 ├── notebooks/                  # Jupyter notebooks for EDA and feature engineering
-├── src/                        # Python scripts for data processing, feature engineering, and modeling
-│   ├── data_processing.py      # Data preprocessing pipeline
-│   ├── feature_engineering.py  # Feature engineering functions
-│   ├── modeling.py             # Model training and evaluation
-├── dependencies.py             # Script to install project dependencies
+├── src/                        # Python scripts for data processing and modeling
+│   ├── preprocessing.py        # Data preprocessing functions
+│   ├── feat_engineering.py     # Feature engineering functions
+│   ├── utils.py                # Utility functions for project automation
+├── visuals/                    # Visualizations and plots
+├── install_dependencies.py     # Script to set up the project environment
 ├── README.md                   # Project documentation
-└── visuals/                    # Visualizations and plots
+└── tree.txt                    # File structure of the repository
 ```
 
-## Installation
+---
 
-To set up the project environment, clone the repository and run the following:
+## ⚙️ Installation
+
+To set up the environment and install required libraries, clone this repository and run:
 
 ```bash
-py dependencies.py
+py install_dependencies.py
 ```
 
-This will install all the required libraries.
+---
 
-## Usage
+## 💻 Usage
 
-1. **Prepare the Data**
-   - Place the dataset in the `data/` directory.
-   - Run the preprocessing script to clean and transform the data.
+### 1. **Prepare the Data**
+- Place raw datasets in the `data/raw/` directory.
+- Run `src/preprocessing.py` to clean and transform the data.
 
-2. **Feature Engineering**
-   - Use the feature engineering module to generate new features.
+### 2. **Feature Engineering**
+- Execute `src/feat_engineering.py` to generate additional predictive features.
 
-3. **Model Training**
-   - Train the model using the scripts in `src/modeling.py`.
-   - Use Optuna for hyperparameter tuning.
+### 3. **Model Training**
+- Train and evaluate models using the scripts in `src/` or Jupyter notebooks in `notebooks/`.
+- Use **Optuna** for hyperparameter tuning.
 
-4. **Visualizations**
-   - Check the `visuals/` directory for key plots illustrating insights and results.
+### 4. **Visualizations**
+- Explore insightful plots in the `visuals/` directory.
 
-## Next Steps
+---
 
-- Adding additional ML models (e.g., Gradient Boosting, XGBoost) for comparison.
-- Deploying the model using a REST API for real-time churn predictions.
-- Exploring SHAP values for enhanced model interpretability.
+## 🛠 Next Steps
 
-## Contribution
+1. **Model Comparisons**
+   - Experiment with advanced models like **Gradient Boosting**, **XGBoost**, and **LightGBM**.
 
-Feel free to open an issue or submit a pull request if you have suggestions or improvements.
+2. **Deployment**
+   - Develop a REST API for real-time churn prediction.
+
+3. **Interpretability**
+   - Use **SHAP** values to improve model explainability and enhance business insights.
+
+---
+
+## 🤝 Contribution
+
+Contributions are welcome! Feel free to:
+- Open an **issue** for bug reports or feature suggestions.
+- Submit a **pull request** to improve the project.
+
+---
+
+## 🌟 Acknowledgments
+
+A special thanks to the **BCG X** team for providing this opportunity and invaluable guidance throughout the project.
+

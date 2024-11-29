@@ -6,19 +6,36 @@ E:.
 |   tree.txt
 |   
 +---src
-|       preprocessing.py
-|       feat_engineering.py
-|       utils.py
-|       
+|   |   preprocessing.py
+|   |   feat_engineering.py
+|   |   utils.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           utils.cpython-313.pyc
+|           preprocessing.cpython-313.pyc
+|           feat_engineering.cpython-313.pyc
+|           
 +---visuals
+|       output.png
+|       output_2.png
+|       output_3.png
+|       output_4.png
+|       output_5.png
+|       output_6.png
+|       output_7.png
+|       output_8.png
+|       output_9.png
+|       
 +---notebooks
 |       EDA.ipynb
-|       EDA (Model Answer).ipynb
 |       feature_engineering.ipynb
+|       Task 4 - modeling_starter.ipynb
 |       
 \---data
     |   clean_data_after_eda.csv
     |   final_merged_features.csv
+    |   data_for_predictions.csv
     |   
     \---raw
             client_data.csv

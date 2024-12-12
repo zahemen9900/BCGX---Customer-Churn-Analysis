@@ -1,44 +1,98 @@
-Folder PATH listing for volume MSEN
-Volume serial number is AED0-501D
-E:.
-|   README.md
 |   install_dependencies.py
+|   README.md
 |   tree.txt
 |   
++---.git
+|   |   config
+|   |   description
+|   |   HEAD
+|   |   index
+|   |   packed-refs
+|   |   
+|   +---branches
+|   +---hooks
+|   |       applypatch-msg.sample
+|   |       commit-msg.sample
+|   |       fsmonitor-watchman.sample
+|   |       post-update.sample
+|   |       pre-applypatch.sample
+|   |       pre-commit.sample
+|   |       pre-merge-commit.sample
+|   |       pre-push.sample
+|   |       pre-rebase.sample
+|   |       pre-receive.sample
+|   |       prepare-commit-msg.sample
+|   |       push-to-checkout.sample
+|   |       sendemail-validate.sample
+|   |       update.sample
+|   |       
+|   +---info
+|   |       exclude
+|   |       
+|   +---logs
+|   |   |   HEAD
+|   |   |   
+|   |   \---refs
+|   |       +---heads
+|   |       |       master
+|   |       |       
+|   |       \---remotes
+|   |           \---origin
+|   |                   HEAD
+|   |                   
+|   +---objects
+|   |   +---info
+|   |   \---pack
+|   |           pack-32220f71a33a8cb1fa06c16758c64703dd96cb6f.idx
+|   |           pack-32220f71a33a8cb1fa06c16758c64703dd96cb6f.pack
+|   |           pack-32220f71a33a8cb1fa06c16758c64703dd96cb6f.rev
+|   |           
+|   \---refs
+|       +---heads
+|       |       master
+|       |       
+|       +---remotes
+|       |   \---origin
+|       |           HEAD
+|       |           
+|       \---tags
++---data
+|   |   clean_data_after_eda.csv
+|   |   data_4_predictions.csv
+|   |   data_for_predictions.csv
+|   |   final_merged_features.csv
+|   |   
+|   \---raw
+|           client_data.csv
+|           Data Description.pdf
+|           price_data.csv
+|           
++---notebooks
+|       EDA.ipynb
+|       feature_engineering.ipynb
+|       modeling.ipynb
+|       
 +---src
-|   |   preprocessing.py
 |   |   feat_engineering.py
+|   |   models.py
+|   |   preprocessing.py
 |   |   utils.py
 |   |   __init__.py
 |   |   
 |   \---__pycache__
-|           utils.cpython-313.pyc
-|           preprocessing.cpython-313.pyc
 |           feat_engineering.cpython-313.pyc
+|           models.cpython-312.pyc
+|           preprocessing.cpython-313.pyc
+|           utils.cpython-312.pyc
+|           utils.cpython-313.pyc
 |           
-+---visuals
-|       output.png
-|       output_2.png
-|       output_3.png
-|       output_4.png
-|       output_5.png
-|       output_6.png
-|       output_7.png
-|       output_8.png
-|       output_9.png
-|       
-+---notebooks
-|       EDA.ipynb
-|       feature_engineering.ipynb
-|       Task 4 - modeling_starter.ipynb
-|       
-\---data
-    |   clean_data_after_eda.csv
-    |   final_merged_features.csv
-    |   data_for_predictions.csv
-    |   
-    \---raw
-            client_data.csv
-            Data Description.pdf
-            price_data.csv
-            
+\---visuals
+        output.png
+        output_2.png
+        output_3.png
+        output_4.png
+        output_5.png
+        output_6.png
+        output_7.png
+        output_8.png
+        output_9.png

@@ -1,5 +1,8 @@
 # SME Customer Churn Prediction - BCG _**X**_
 
+![BCG-X Report](visuals/Social_Media_Report_Presentation.png)
+
+
 This repository showcases the work completed during my virtual internship at **BCG X** _(British Consulting Group)_ as a Data Science Intern. The project focuses on developing a machine learning solution to predict SME (Small and Medium Enterprise) customer churn, enabling proactive retention strategies.
 
 ---
@@ -100,7 +103,7 @@ from src.models import LightGBMChurnPredictor
 
 # Initialize and train model
 model = LightGBMChurnPredictor()
-model.train(X_train, y_train)
+model.train(data, n_trials = 50)
 ```
 
 ### 3. **Prediction**

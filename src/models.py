@@ -13,6 +13,9 @@ from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE, ADASYN
 from optuna.visualization import plot_optimization_history, plot_param_importances
 from sklearn.base import BaseEstimator, ClassifierMixin
+import sys
+sys.path.append('../src')
+from utils import save_plot
 
 class LightGBMChurnPredictor(ClassifierMixin, BaseEstimator):
     def __init__(self, test_size=0.2, random_state=42, sampling_method='none', use_gpu=True):
@@ -315,7 +318,7 @@ class LightGBMChurnPredictor(ClassifierMixin, BaseEstimator):
         
         return evaluation
     
-    def plot_confusion_matrix(self, figsize=(10, 8)):
+    def plot_confusion_matrix(self, figsize=(10, 8), save=False):
         """Plot confusion matrix"""
         if not self.is_fitted_:
             raise ValueError("Model hasn't been trained yet. Call train() first.")
@@ -335,6 +338,8 @@ class LightGBMChurnPredictor(ClassifierMixin, BaseEstimator):
         plt.title('Confusion Matrix', pad=20)
         plt.grid(False)
         
+        if save:
+            save_plot(filename='confusion_matrix.png')
         return fig
     
     def get_feature_importance(self):
@@ -379,12 +384,12 @@ class LightGBMChurnPredictor(ClassifierMixin, BaseEstimator):
         X_scaled = self.scaler.transform(X)
         return self.model.predict(X_scaled)
     
-    def plot_feature_importance(self, figsize=(12, 8)):
+    def plot_feature_importance(self, figsize=(12, 8), n = 10, save=False):
         """Plot feature importance"""
         if self.model is None:
             raise ValueError("Model hasn't been trained yet")
 
-        importance_df = self.get_feature_importance()
+        importance_df = self.get_feature_importance()[:n]
         fig, ax = plt.subplots(figsize=figsize)
         sns.barplot(x='importance', y='feature', data=importance_df, palette='viridis', ax=ax)
         ax.set_title('Feature Importance')
@@ -394,9 +399,12 @@ class LightGBMChurnPredictor(ClassifierMixin, BaseEstimator):
         for container in ax.containers:
             ax.bar_label(container, fmt='%.2f', label_type='edge', fontsize=8, fontweight='bold')
 
+        if save:
+            save_plot(filename='feature_importance.png')
         plt.show()
-    
-    def plot_roc_curve(self, figsize=(10, 6)):
+
+
+    def plot_roc_curve(self, figsize=(10, 6), save=False):
         """
         Plot the ROC curve with AUC score
         
@@ -443,9 +451,11 @@ class LightGBMChurnPredictor(ClassifierMixin, BaseEstimator):
         ax.grid(True, alpha=0.3)
         
         plt.tight_layout()
+        if save:
+            save_plot(filename='roc_curve.png')
         return fig
     
-    def plot_precision_recall_curve(self, figsize=(10, 6)):
+    def plot_precision_recall_curve(self, figsize=(10, 6), save=False):
         """
         Plot the Precision-Recall curve with Average Precision score
         
@@ -493,7 +503,65 @@ class LightGBMChurnPredictor(ClassifierMixin, BaseEstimator):
         ax.grid(True, alpha=0.3)
         
         plt.tight_layout()
+        if save:
+            save_plot(filename='precision_recall_curve.png')
         return fig
+
+    def save_best_model(self, filepath='src/best_model.pkl'):
+        """
+        Save the best model from the Optuna study.
+        
+        Args:
+            filepath (str): Path where to save the model. Defaults to 'best_model.pkl'
+        
+        Returns:
+            bool: True if save successful, False otherwise
+        """
+        try:
+            if not hasattr(self, 'study') or self.study is None:
+                print("No study found. Please train the model first.")
+                return False
+            
+            # Get best trial and parameters
+            best_trial = self.study.best_trial
+            best_params = best_trial.params
+            
+            # Create model with best parameters
+            best_model = lgb.LGBMClassifier(**best_params)
+            best_model.fit(self.X_train, self.y_train)
+            
+            # Save model using joblib
+            import joblib
+            joblib.dump(best_model, filepath)
+            
+            print(f"Best model saved successfully to {filepath}")
+            print(f"Best parameters: {best_params}")
+            print(f"Best score: {best_trial.value}")
+            
+            return True
+        
+        except Exception as e:
+            print(f"Error saving model: {str(e)}")
+            return False
+
+    def load_model(self, filepath='src/best_model.pkl'):
+        """
+        Load a saved model.
+        
+        Args:
+            filepath (str): Path to the saved model file
+        
+        Returns:
+            The loaded model or None if loading fails
+        """
+        try:
+            import joblib
+            model = joblib.load(filepath)
+            print(f"Model loaded successfully from {filepath}")
+            return model
+        except Exception as e:
+            print(f"Error loading model: {str(e)}")
+            return None
 
 
 

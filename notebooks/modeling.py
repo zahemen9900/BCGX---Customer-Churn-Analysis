@@ -6,7 +6,8 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # %% Cell 2
-import os, sys
+import os
+import sys
 import optuna
 import numpy as np
 import pandas as pd
@@ -50,7 +51,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 repo_root = os.path.abspath(os.path.join(script_dir, ".."))
 data_dir = os.path.join(repo_root, "data")
 df = pd.read_csv(os.path.join(data_dir, "data_for_predictions.csv"))
-df.drop(columns=["Unnamed: 0"], inplace=True)
+if "Unnamed: 0" in df.columns:
+    df.drop(columns=["Unnamed: 0"], inplace=True)
 df.head()
 
 # %% Cell 4

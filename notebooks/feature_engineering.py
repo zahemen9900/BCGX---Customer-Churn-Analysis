@@ -7,7 +7,8 @@ import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os, sys
+import os
+import sys
 
 sys.path.append('../src')
 from preprocessing import clean_data

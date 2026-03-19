@@ -14,7 +14,10 @@ from preprocessing import clean_data
 from feat_engineering import FeatureEngineering
 
 # %% Cell 2
-df = pd.read_csv('e:/BCGX/data/clean_data_after_eda.csv')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+repo_root = os.path.abspath(os.path.join(script_dir, ".."))
+data_dir = os.path.join(repo_root, "data")
+df = pd.read_csv(os.path.join(data_dir, "clean_data_after_eda.csv"))
 
 # %% Cell 3
 df = clean_data(df)
@@ -24,7 +27,7 @@ df.head()
 df.info(memory_usage= 'deep')
 
 # %% Cell 5
-price_df0 = pd.read_csv(r'E:\BCGX Data\Data\price_data.csv')
+price_df0 = pd.read_csv(os.path.join(data_dir, "raw", "price_data.csv"))
 price_df0 = clean_data(price_df0)
 price_df = price_df0.copy(deep=True)
 
@@ -351,8 +354,8 @@ price_df
 
 # %% Cell 43
 # Assuming price_df is already defined
-df_e = pd.read_csv('e:/BCGX/data/clean_data_after_eda.csv')
-price_df_e = pd.read_csv(r'E:\BCGX Data\Data\price_data.csv')
+df_e = pd.read_csv(os.path.join(data_dir, "clean_data_after_eda.csv"))
+price_df_e = pd.read_csv(os.path.join(data_dir, "raw", "price_data.csv"))
 
 df_e = clean_data(df_e)
 price_df_e = clean_data(price_df_e)
@@ -379,4 +382,4 @@ df_enriched[df_enriched.select_dtypes(include = np.float64).columns] = df_enrich
 df_enriched.info(memory_usage='deep')
 
 # %% Cell 48
-df_enriched.to_csv('e:/BCGX/data/final_merged_features.csv', index=False)
+df_enriched.to_csv(os.path.join(data_dir, "final_merged_features.csv"), index=False)

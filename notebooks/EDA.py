@@ -41,7 +41,9 @@ plot_params = dict(
 print(os.getcwd())
 
 # %% Cell 3
-data_path = r'e:\BCGX\data\raw'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+repo_root = os.path.abspath(os.path.join(script_dir, ".."))
+data_path = os.path.join(repo_root, "data", "raw")
 client_df = pd.read_csv(os.path.join(data_path,'client_data.csv'))
 price_df = pd.read_csv(os.path.join(data_path, 'price_data.csv'))
 

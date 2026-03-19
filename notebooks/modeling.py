@@ -19,8 +19,6 @@ from sklearn.metrics import classification_report, accuracy_score, confusion_mat
 import tqdm as notebook_tqdm
 from IPython.display import display
 
-from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
-
 sys.path.append('../src')
 from utils import save_plot
 from models import ChurnPredictor, LightGBMChurnPredictor
@@ -49,11 +47,11 @@ plot_params = dict(
 # %config InlineBackend.figure_format = 'retina'
 # %matplotlib inline
 
-# Set plot style
-sns.set(color_codes=True)
-
 # %% Cell 3
-df = pd.read_csv('/home/zahemen/projects/BCGX---Customer-Churn-Analysis/data/data_for_predictions.csv')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+repo_root = os.path.abspath(os.path.join(script_dir, ".."))
+data_dir = os.path.join(repo_root, "data")
+df = pd.read_csv(os.path.join(data_dir, "data_for_predictions.csv"))
 df.drop(columns=["Unnamed: 0"], inplace=True)
 df.head()
 
@@ -62,7 +60,7 @@ df.info(memory_usage = 'deep')
 
 # %% Cell 5
 # Make a copy of our data
-train_df = df.copy(deep='True')
+train_df = df.copy(deep=True)
 
 # Separate target variable from independent variables
 y = df['churn']

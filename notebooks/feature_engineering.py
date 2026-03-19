@@ -368,7 +368,8 @@ df_e, enriched_price_df = pipeline.wrangle_final(df_e, enriched_price_df)
 # final_features now contains all the engineered features
 
 # %% Cell 44
-display(df_e), display(enriched_price_df)
+print(df_e)
+print(enriched_price_df)
 
 # %% Cell 45
 df_enriched = enriched_price_df.merge(df_e, on = 'id', how = 'inner')

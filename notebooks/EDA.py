@@ -9,7 +9,7 @@ import seaborn as sns
 import sys, os
 try:
     from src.utils import save_plot 
-except:
+except ImportError:
     sys.path.append('../src')
     from utils import save_plot
 # Shows plots in jupyter notebook

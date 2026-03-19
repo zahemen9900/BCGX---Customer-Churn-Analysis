@@ -16,8 +16,6 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix, ConfusionMatrixDisplay
-import tqdm as notebook_tqdm
-from IPython.display import display
 
 sys.path.append('../src')
 from utils import save_plot

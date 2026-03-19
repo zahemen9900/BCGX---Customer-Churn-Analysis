@@ -58,7 +58,7 @@ df.info(memory_usage = 'deep')
 
 # %% Cell 5
 # Make a copy of our data
-train_df = df.copy(deep=True)
+train_df = df.copy()
 
 # Separate target variable from independent variables
 y = df['churn']

@@ -29,7 +29,7 @@ df.info(memory_usage= 'deep')
 # %% Cell 5
 price_df0 = pd.read_csv(os.path.join(data_dir, "raw", "price_data.csv"))
 price_df0 = clean_data(price_df0)
-price_df = price_df0.copy(deep=True)
+price_df = price_df0.copy()
 
 price_df0.head()
 
@@ -347,7 +347,7 @@ price_df.columns
 
 price_df = price_df.drop(
     ['rolling_3m_avg_price_off_peak_var', 'price_off_peak_var_rolling', 'avg_price_off_peak_var', 'min_price_off_peak_var', 'max_price_off_peak_var', \
-     'price_off_peak_fix', 'price_off_peak_fix_rolling', 'avg_price_off_peak_fix', 'rolling_3m_avg_price_off_peak_fix', 'price_off_peak_var_rolling']
+     'price_off_peak_fix', 'price_off_peak_fix_rolling', 'avg_price_off_peak_fix', 'rolling_3m_avg_price_off_peak_fix']
     , axis = 1)
 
 price_df

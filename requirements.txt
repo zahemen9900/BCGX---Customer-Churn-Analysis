@@ -1,0 +1,2 @@
+# Pip-only dependencies for this project.
+# Keep conda-installable packages in environment.yml.

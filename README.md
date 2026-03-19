@@ -88,8 +88,11 @@ This repository showcases the work completed during my virtual internship at **B
 # Clone repository
 git clone [repository-url]
 
-# Install dependencies
-python3 install_dependencies.py
+# Create/update conda environment
+bash scripts/create_conda_env.sh
+
+# Activate environment
+conda activate bcgx-churn
 ```
 
 ---
@@ -111,6 +114,13 @@ from src.models import LightGBMChurnPredictor
 # Initialize and train model
 model = LightGBMChurnPredictor()
 model.train(data, n_trials = 50)
+```
+
+### 4. **Run notebook counterpart scripts**
+```bash
+./notebooks/EDA.sh
+./notebooks/feature_engineering.sh
+./notebooks/modeling.sh
 ```
 
 ### 3. **Prediction**

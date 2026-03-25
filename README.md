@@ -60,8 +60,15 @@ This repository showcases the work completed during my virtual internship at **B
 │   ├── raw/                    # Original SME customer data
 │   └── processed/              # Preprocessed datasets
 ├── notebooks/                  
-│   ├── eda.ipynb              # Exploratory Data Analysis
-│   └── modeling.ipynb         # Model Development
+│   ├── EDA.ipynb              # Exploratory Data Analysis notebook
+│   ├── feature_engineering.ipynb  # Feature engineering notebook
+│   ├── modeling.ipynb         # Model development notebook
+│   ├── EDA.py                 # Script counterpart for EDA notebook
+│   ├── feature_engineering.py # Script counterpart for feature engineering notebook
+│   ├── modeling.py            # Script counterpart for modeling notebook
+│   ├── EDA.sh                 # Shell runner for EDA.py
+│   ├── feature_engineering.sh # Shell runner for feature_engineering.py
+│   └── modeling.sh            # Shell runner for modeling.py
 ├── src/                       
 │   ├── models.py              # LightGBM implementation
 │   ├── utils.py               # Utility functions
@@ -81,8 +88,11 @@ This repository showcases the work completed during my virtual internship at **B
 # Clone repository
 git clone [repository-url]
 
-# Install dependencies
-python3 install_dependencies.py
+# Create/update conda environment
+bash scripts/create_conda_env.sh
+
+# Activate environment
+conda activate bcgx-churn
 ```
 
 ---
@@ -104,6 +114,13 @@ from src.models import LightGBMChurnPredictor
 # Initialize and train model
 model = LightGBMChurnPredictor()
 model.train(data, n_trials = 50)
+```
+
+### 4. **Run notebook counterpart scripts**
+```bash
+./notebooks/EDA.sh
+./notebooks/feature_engineering.sh
+./notebooks/modeling.sh
 ```
 
 ### 3. **Prediction**
@@ -154,4 +171,3 @@ Contributions welcome! Please:
 ## 🌟 Acknowledgments
 
 Special thanks to **BCG X** for providing the opportunity and guidance throughout this project.
-
